@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy and Advisory Library | iTabs Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vic-navy: #201547;
+            --vic-blue: #0052C2;
+            --vic-teal: #00B2A9;
+            --vic-purple: #87189D;
+            --vic-light: #F9F9F9;
+            --vic-white: #FFFFFF;
+            --vic-gray: #53565A;
+            --itabs-blue: #0066CC;
+            --itabs-glow: rgba(0, 102, 204, 0.25);
+        }
+
+```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Public Sans', -apple-system, sans-serif;
+        background: var(--vic-light);
+        color: var(--vic-navy);
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    /* Demo Banner */
+    .demo-banner {
+        background: linear-gradient(135deg, var(--itabs-blue), #0052C2);
+        color: white;
+        text-align: center;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .demo-banner strong {
+        color: #FFD700;
+    }
+
+    /* Header */
+    .header {
+        background: var(--vic-navy);
+        padding: 1rem 2rem;
+    }
+
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .vic-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: white;
+        text-decoration: none;
+    }
+
+    .vic-logo-icon {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: var(--vic-navy);
+        font-size: 0.7rem;
+    }
+
+    .vic-logo-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .header-nav {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .header-nav a {
+        color: rgba(255,255,255,0.85);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+    }
+
+    .header-nav a:hover {
+        color: white;
+    }
+
+    /* Title Section */
+    .title-section {
+        background: linear-gradient(135deg, var(--vic-navy) 0%, #2d1f5c 100%);
+        padding: 2.5rem 2rem;
+        color: white;
+    }
+
+    .title-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .title-section h1 {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .title-section p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        max-width: 700px;
+    }
+
+    /* AI Search Section */
+    .ai-search-section {
+        background: white;
+        padding: 2rem;
+        border-bottom: 3px solid var(--vic-teal);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .ai-search-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .ai-search-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .ai-search-header h2 {
+        font-size: 1.4rem;
+        color: var(--vic-navy);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .ai-search-header p {
+        color: var(--vic-gray);
+        font-size: 0.95rem;
+    }
+
+    .ai-search-box {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .ai-search-box textarea {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid #E0E0E0;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: inherit;
+        resize: none;
+        min-height: 60px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .ai-search-box textarea:focus {
+        outline: none;
+        border-color: var(--vic-teal);
+        box-shadow: 0 0 0 3px rgba(0, 178, 169, 0.15);
+    }
+
+    .ai-search-box textarea::placeholder {
+        color: #999;
+    }
+
+    .ai-search-btn {
+        background: linear-gradient(135deg, var(--vic-teal), #008F88);
+        color: white;
+        border: none;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+    }
+
+    .ai-search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 178, 169, 0.3);
+    }
+
+    .ai-search-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .example-questions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .example-q {
+        background: var(--vic-light);
+        border: 1px solid #E0E0E0;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: var(--vic-gray);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .example-q:hover {
+        background: #E8F4F3;
+        border-color: var(--vic-teal);
+        color: var(--vic-navy);
+    }
+
+    /* AI Response Area */
+    .ai-response {
+        display: none;
+        margin-top: 1.5rem;
+        background: linear-gradient(135deg, #F0FAF9, #E8F4F3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        border-left: 4px solid var(--vic-teal);
+    }
+
+    .ai-response.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ai-response-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        color: var(--vic-navy);
+    }
+
+    .ai-response-header .ai-icon {
+        background: var(--vic-teal);
+        color: white;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+    }
+
+    .ai-response-content {
+        color: var(--vic-navy);
+        line-height: 1.7;
+    }
+
+    .ai-response-content p {
+        margin-bottom: 1rem;
+    }
+
+    .ai-response-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .ai-response-content strong {
+        color: var(--vic-blue);
+    }
+
+    .ai-response-content ul {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .ai-response-content li {
+        margin-bottom: 0.5rem;
+    }
+
+    .ai-loading {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--vic-gray);
+    }
+
+    .ai-loading-dots {
+        display: flex;
+        gap: 4px;
+    }
+
+    .ai-loading-dots span {
+        width: 8px;
+        height: 8px;
+        background: var(--vic-teal);
+        border-radius: 50%;
+        animation: bounce 1.4s infinite ease-in-out both;
+    }
+
+    .ai-loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+    .ai-loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes bounce {
+        0%, 80%, 100% { transform: scale(0); }
+        40% { transform: scale(1); }
+    }
+
+    .ai-disclaimer {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 178, 169, 0.2);
+        font-size: 0.8rem;
+        color: var(--vic-gray);
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .ai-disclaimer-icon {
+        flex-shrink: 0;
+    }
+
+    /* Regular Search Section */
+    .search-section {
+        background: white;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid #E0E0E0;
+    }
+
+    .search-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .search-box {
+        flex: 1;
+        min-width: 250px;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .search-box input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 2px solid #E0E0E0;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-family: inherit;
+    }
+
+    .search-box input:focus {
+        outline: none;
+        border-color: var(--vic-blue);
+    }
+
+    .search-btn {
+        background: var(--vic-blue);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .search-btn:hover {
+        background: #003d91;
+    }
+
+    .az-links {
+        display: flex;
+        gap: 0.25rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .az-label {
+        font-weight: 600;
+        margin-right: 0.5rem;
+        color: var(--vic-gray);
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .az-links a {
+        color: var(--vic-blue);
+        text-decoration: none;
+        padding: 0.25rem 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border-radius: 3px;
+        transition: background 0.2s;
+    }
+
+    .az-links a:hover {
+        background: rgba(0, 82, 194, 0.1);
+    }
+
+    /* Main Content */
+    .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--vic-navy);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Category Grid */
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .category-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 1px solid #E8E8E8;
+    }
+
+    .category-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+
+    .card-image {
+        height: 120px;
+        background: linear-gradient(135deg, var(--vic-teal), var(--vic-blue));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+    }
+
+    .card-image.hr { background: linear-gradient(135deg, #00B2A9, #008F88); }
+    .card-image.finance { background: linear-gradient(135deg, #0052C2, #003d91); }
+    .card-image.student { background: linear-gradient(135deg, #87189D, #6B1480); }
+    .card-image.infra { background: linear-gradient(135deg, #53565A, #3D3F42); }
+    .card-image.ohs { background: linear-gradient(135deg, #E35205, #C44500); }
+    .card-image.ops { background: linear-gradient(135deg, #00B2A9, #0052C2); }
+    .card-image.council { background: linear-gradient(135deg, #201547, #3d2a7a); }
+    .card-image.learning { background: linear-gradient(135deg, #87189D, #00B2A9); }
+    .card-image.ict { background: linear-gradient(135deg, #0052C2, #87189D); }
+
+    .card-content {
+        padding: 1.25rem;
+    }
+
+    .card-content h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--vic-navy);
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .card-content h3 span {
+        flex: 1;
+    }
+
+    .card-content p {
+        font-size: 0.9rem;
+        color: var(--vic-gray);
+        line-height: 1.5;
+    }
+
+    /* Quick Links */
+    .quick-links {
+        margin-top: 2.5rem;
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .quick-links h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .quick-links-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .quick-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: var(--vic-light);
+        border-radius: 6px;
+        color: var(--vic-blue);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+    }
+
+    .quick-link:hover {
+        background: #E8F0FA;
+    }
+
+    /* iTabs Button Styles */
+    .itabs-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        background: var(--itabs-blue);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: 700;
+        font-style: italic;
+        font-family: Georgia, serif;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px var(--itabs-glow);
+        flex-shrink: 0;
+    }
+
+    .itabs-btn:hover {
+        transform: scale(1.15);
+        box-shadow: 0 4px 15px var(--itabs-glow);
+    }
+
+    .itabs-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Popup Overlay */
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(32, 21, 71, 0.75);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        backdrop-filter: blur(4px);
+    }
+
+    .popup-overlay.active {
+        display: flex;
+    }
+
+    .popup {
+        background: white;
+        color: var(--vic-navy);
+        border-radius: 12px;
+        max-width: 480px;
+        width: 100%;
+        max-height: 85vh;
+        overflow-y: auto;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        animation: popupIn 0.3s ease;
+    }
+
+    @keyframes popupIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    .popup-header {
+        background: var(--vic-navy);
+        color: white;
+        padding: 1rem 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .popup-header h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .popup-close {
+        background: rgba(255,255,255,0.15);
+        border: none;
+        color: white;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+
+    .popup-close:hover {
+        background: rgba(255,255,255,0.25);
+    }
+
+    .popup-content {
+        padding: 1.25rem;
+    }
+
+    .popup-content p {
+        margin-bottom: 1rem;
+        line-height: 1.7;
+    }
+
+    .popup-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .popup-content strong {
+        color: var(--vic-blue);
+    }
+
+    .popup-content ul {
+        margin: 1rem 0;
+        padding-left: 1.25rem;
+    }
+
+    .popup-content li {
+        margin-bottom: 0.5rem;
+    }
+
+    .popup-highlight {
+        background: linear-gradient(135deg, #E8F4F3, #D4EFED);
+        border-left: 3px solid var(--vic-teal);
+        padding: 1rem;
+        border-radius: 0 8px 8px 0;
+        margin: 1rem 0;
+    }
+
+    .popup-highlight p {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .popup-warning {
+        background: #FFF3E0;
+        border-left: 3px solid #E35205;
+        padding: 1rem;
+        border-radius: 0 8px 8px 0;
+        margin: 1rem 0;
+    }
+
+    .popup-warning p {
+        margin: 0;
+    }
+
+    /* Footer */
+    .footer {
+        background: var(--vic-navy);
+        color: white;
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .footer-ack {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .footer-flags {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .footer-flag {
+        width: 32px;
+        height: 20px;
+        background: #333;
+        border-radius: 2px;
+    }
+
+    .footer-ack p {
+        font-size: 0.85rem;
+        opacity: 0.85;
+        max-width: 400px;
+    }
+
+    .itabs-credit {
+        text-align: right;
+    }
+
+    .itabs-credit p {
+        font-size: 0.85rem;
+        opacity: 0.7;
+    }
+
+    .itabs-credit a {
+        color: var(--vic-teal);
+        text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .header-nav {
+            display: none;
+        }
+        
+        .search-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .az-links {
+            justify-content: center;
+        }
+
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .itabs-credit {
+            text-align: center;
+        }
+
+        .ai-search-box {
+            flex-direction: column;
+        }
+
+        .ai-search-btn {
+            justify-content: center;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        👆 <strong>iTabs Demo</strong> — Ask a question below or click the blue <button class="itabs-btn" style="vertical-align: middle; margin: 0 2px;">i</button> buttons for instant explanations
+    </div>
+
+```
+<!-- Header -->
+<header class="header">
+    <div class="header-top">
+        <a href="#" class="vic-logo">
+            <div class="vic-logo-icon">VIC</div>
+            <span class="vic-logo-text">Policy and Advisory Library</span>
+        </a>
+        <nav class="header-nav">
+            <a href="#">PAL Help</a>
+            <a href="#">About PAL</a>
+            <a href="#">Recently Updated</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Title Section -->
+<section class="title-section">
+    <div class="title-container">
+        <h1>
+            Policy and Advisory Library
+            <button class="itabs-btn" data-popup="what-is-pal">i</button>
+        </h1>
+        <p>Find operational policies and guidance for schools from the Department of Education</p>
+    </div>
+</section>
+
+<!-- AI Search Section -->
+<section class="ai-search-section">
+    <div class="ai-search-container">
+        <div class="ai-search-header">
+            <h2>
+                🤖 Ask a Policy Question
+                <button class="itabs-btn" data-popup="ai-search">i</button>
+            </h2>
+            <p>Type your question in plain English — get a helpful answer about school policies</p>
+        </div>
+        
+        <div class="ai-search-box">
+            <textarea id="questionInput" placeholder="e.g. What are my obligations around student allergies?"></textarea>
+            <button class="ai-search-btn" id="askBtn" onclick="askQuestion()">
+                <span>Ask</span>
+                <span>→</span>
+            </button>
+        </div>
+
+        <div class="example-questions">
+            <span class="example-q" onclick="setQuestion('Can I take students on an excursion to the beach?')">Excursions to the beach?</span>
+            <span class="example-q" onclick="setQuestion('What are the rules about mobile phones in schools?')">Mobile phone rules?</span>
+            <span class="example-q" onclick="setQuestion('How do I handle a student with anaphylaxis?')">Student anaphylaxis?</span>
+            <span class="example-q" onclick="setQuestion('What leave am I entitled to as a teacher?')">Teacher leave entitlements?</span>
+        </div>
+
+        <!-- AI Response Area -->
+        <div class="ai-response" id="aiResponse">
+            <div class="ai-response-header">
+                <span class="ai-icon">✨</span>
+                <span>Policy Assistant</span>
+            </div>
+            <div class="ai-response-content" id="aiResponseContent">
+                <!-- Response injected here -->
+            </div>
+            <div class="ai-disclaimer">
+                <span class="ai-disclaimer-icon">ℹ️</span>
+                <span>This is AI-generated guidance. Always verify with the official PAL documentation and consult your principal or regional office for specific situations.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Regular Search Section -->
+<section class="search-section">
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" placeholder="Search PAL for policies, guidelines, resources...">
+            <button class="search-btn">Search</button>
+        </div>
+        <div class="az-links">
+            <span class="az-label">
+                Topics A-Z
+                <button class="itabs-btn" data-popup="az-index">i</button>
+            </span>
+            <a href="#">A</a><a href="#">B</a><a href="#">C</a><a href="#">D</a><a href="#">E</a><a href="#">F</a><a href="#">G</a><a href="#">H</a><a href="#">I</a><a href="#">J</a><a href="#">K</a><a href="#">L</a><a href="#">M</a><a href="#">N</a><a href="#">O</a><a href="#">P</a><a href="#">Q</a><a href="#">R</a><a href="#">S</a><a href="#">T</a><a href="#">U</a><a href="#">V</a><a href="#">W</a><a href="#">X</a><a href="#">Y</a><a href="#">Z</a>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="main-content">
+    <h2 class="section-title">
+        Filter topics by category
+        <button class="itabs-btn" data-popup="categories">i</button>
+    </h2>
+
+    <div class="category-grid">
+        <!-- HR -->
+        <div class="category-card">
+            <div class="card-image hr">👥</div>
+            <div class="card-content">
+                <h3>
+                    <span>Human Resources (HR)</span>
+                    <button class="itabs-btn" data-popup="hr">i</button>
+                </h3>
+                <p>Employment conditions, workforce management, recruitment and respectful workplaces</p>
+            </div>
+        </div>
+
+        <!-- Finance -->
+        <div class="category-card">
+            <div class="card-image finance">💰</div>
+            <div class="card-content">
+                <h3>
+                    <span>Finance and Procurement</span>
+                    <button class="itabs-btn" data-popup="finance">i</button>
+                </h3>
+                <p>Finance Manual, Student Resource Package, procurement, budget requirements</p>
+            </div>
+        </div>
+
+        <!-- Student -->
+        <div class="category-card">
+            <div class="card-image student">🎒</div>
+            <div class="card-content">
+                <h3>
+                    <span>Student Health, Safety & Wellbeing</span>
+                    <button class="itabs-btn" data-popup="student">i</button>
+                </h3>
+                <p>Child safety, health conditions, students with disabilities, duty of care</p>
+            </div>
+        </div>
+
+        <!-- Infrastructure -->
+        <div class="category-card">
+            <div class="card-image infra">🏫</div>
+            <div class="card-content">
+                <h3>
+                    <span>Infrastructure and Facilities</span>
+                    <button class="itabs-btn" data-popup="infra">i</button>
+                </h3>
+                <p>Planning, building and management of school infrastructure and facilities</p>
+            </div>
+        </div>
+
+        <!-- OHS -->
+        <div class="category-card">
+            <div class="card-image ohs">⚠️</div>
+            <div class="card-content">
+                <h3>
+                    <span>Occupational Health & Safety</span>
+                    <button class="itabs-btn" data-popup="ohs">i</button>
+                </h3>
+                <p>Employee health, safety and wellbeing including the OHS management system</p>
+            </div>
+        </div>
+
+        <!-- Operations -->
+        <div class="category-card">
+            <div class="card-image ops">📋</div>
+            <div class="card-content">
+                <h3>
+                    <span>School Operations</span>
+                    <button class="itabs-btn" data-popup="ops">i</button>
+                </h3>
+                <p>School hours, enrolment, excursions, OSHC, parent payments, mobile phones</p>
+            </div>
+        </div>
+
+        <!-- School Council -->
+        <div class="category-card">
+            <div class="card-image council">🏛️</div>
+            <div class="card-content">
+                <h3>
+                    <span>School Councils</span>
+                    <button class="itabs-btn" data-popup="council">i</button>
+                </h3>
+                <p>Key information and policies to support school council governance</p>
+            </div>
+        </div>
+
+        <!-- Learning -->
+        <div class="category-card">
+            <div class="card-image learning">📚</div>
+            <div class="card-content">
+                <h3>
+                    <span>Learning, Teaching & Curriculum</span>
+                    <button class="itabs-btn" data-popup="learning">i</button>
+                </h3>
+                <p>Curriculum delivery, assessment, reporting, career education</p>
+            </div>
+        </div>
+
+        <!-- ICT -->
+        <div class="category-card">
+            <div class="card-image ict">💻</div>
+            <div class="card-content">
+                <h3>
+                    <span>Information Management & ICT</span>
+                    <button class="itabs-btn" data-popup="ict">i</button>
+                </h3>
+                <p>Hardware, software, ICT security, privacy and records management</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <h2>
+            🔗 Quick Links
+            <button class="itabs-btn" data-popup="quick">i</button>
+        </h2>
+        <div class="quick-links-grid">
+            <a href="#" class="quick-link">📄 School Policy Templates</a>
+            <a href="#" class="quick-link">🔄 Recently Updated</a>
+            <a href="#" class="quick-link">❓ PAL Help</a>
+            <a href="#" class="quick-link">📧 Contact Us</a>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-ack">
+            <div class="footer-flags">
+                <div class="footer-flag" style="background: linear-gradient(#000 50%, #C00 50%);"></div>
+                <div class="footer-flag" style="background: linear-gradient(45deg, #009 33%, #0C0 33%, #0C0 66%, #000 66%);"></div>
+            </div>
+            <p>We respectfully acknowledge the Traditional Owners of country throughout Victoria and pay respect to the ongoing living cultures of First Peoples.</p>
+        </div>
+        <div class="itabs-credit">
+            <p>Information buttons powered by <a href="https://itabs.ai" target="_blank">iTabs</a></p>
+        </div>
+    </div>
+</footer>
+
+<!-- Popup Overlay -->
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+        <div class="popup-header">
+            <h4 id="popupTitle">Info</h4>
+            <button class="popup-close" onclick="closePopup()">×</button>
+        </div>
+        <div class="popup-content" id="popupContent">
+            <!-- Content injected by JS -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // iTabs Content Database for PAL
+    const itabsContent = {
+        'what-is-pal': {
+            title: 'What is PAL?',
+            content: `
+                <p><strong>PAL = Policy and Advisory Library</strong></p>
+                <p>It's the single place where Victorian government school staff find all Department of Education policies, guidelines, and resources.</p>
+                <div class="popup-highlight">
+                    <p>💡 PAL replaced the old School Policy and Advisory Guide (SPAG) in June 2020 — so if someone mentions SPAG, this is where that info lives now.</p>
+                </div>
+                <p>Every topic has three tabs:</p>
+                <ul>
+                    <li><strong>Overview</strong> — Summary of what it covers</li>
+                    <li><strong>Policy</strong> — The official rules</li>
+                    <li><strong>Resources</strong> — Templates, forms, links</li>
+                </ul>
+            `
+        },
+        'ai-search': {
+            title: 'AI Policy Assistant',
+            content: `
+                <p>Ask questions in <strong>plain English</strong> — no need to know the exact policy name.</p>
+                <p>Good for questions like:</p>
+                <ul>
+                    <li>"What do I need to do for a student with diabetes?"</li>
+                    <li>"Can parents volunteer on excursions?"</li>
+                    <li>"How much notice for leave requests?"</li>
+                </ul>
+                <div class="popup-warning">
+                    <p>⚠️ AI provides guidance, not legal advice. Always check the official PAL policy and consult your principal for specific situations.</p>
+                </div>
+            `
+        },
+        'az-index': {
+            title: 'A-Z Topic Index',
+            content: `
+                <p>Click any letter to jump straight to policies starting with that letter.</p>
+                <p><strong>Pro tip:</strong> Each topic only appears once in the A-Z list — no duplicates.</p>
+                <div class="popup-highlight">
+                    <p>🔍 Use Ctrl+F (or Cmd+F on Mac) to search within any page. On mobile, tap the three dots menu and choose "Find in page".</p>
+                </div>
+                <p>Topic names are designed to be intuitive — if you can't find something, try the search bar instead.</p>
+            `
+        },
+        'categories': {
+            title: 'Policy Categories',
+            content: `
+                <p>PAL organises all school policies into <strong>9 main categories</strong> to help you find what you need faster.</p>
+                <p>You can filter the A-Z list by category to only show policies in one area — useful when you know roughly what you're looking for.</p>
+                <div class="popup-highlight">
+                    <p>📌 Most school staff spend their time in just 2-3 categories. Bookmark your frequently used sections.</p>
+                </div>
+            `
+        },
+        'hr': {
+            title: 'Human Resources (HR)',
+            content: `
+                <p>Everything about <strong>people management</strong> in schools — from hiring to retiring.</p>
+                <p>Key topics include:</p>
+                <ul>
+                    <li><strong>Employment conditions</strong> — Leave, pay, entitlements</li>
+                    <li><strong>Recruitment</strong> — Hiring teachers and support staff</li>
+                    <li><strong>Performance</strong> — Reviews, feedback, development</li>
+                    <li><strong>Respectful workplaces</strong> — Bullying, harassment, conduct</li>
+                </ul>
+                <div class="popup-highlight">
+                    <p>📋 This section absorbed all content from the old HRWeb site. Same information, new location.</p>
+                </div>
+            `
+        },
+        'finance': {
+            title: 'Finance and Procurement',
+            content: `
+                <p>Managing school money — budgets, spending, purchasing.</p>
+                <p>Critical documents here:</p>
+                <ul>
+                    <li><strong>Finance Manual</strong> — The bible for school finances</li>
+                    <li><strong>Student Resource Package (SRP)</strong> — How school funding is calculated</li>
+                    <li><strong>Procurement rules</strong> — How to buy things properly</li>
+                </ul>
+                <div class="popup-warning">
+                    <p>⚠️ Getting procurement wrong can have serious consequences. Always check the spending thresholds before purchasing.</p>
+                </div>
+            `
+        },
+        'student': {
+            title: 'Student Health, Safety & Wellbeing',
+            content: `
+                <p>Policies about <strong>keeping students safe and well</strong> — one of the most frequently accessed categories.</p>
+                <p>Covers:</p>
+                <ul>
+                    <li><strong>Child Safe Standards</strong> — Mandatory requirements</li>
+                    <li><strong>Medical conditions</strong> — Allergies, asthma, diabetes, etc.</li>
+                    <li><strong>Students with disabilities</strong> — Support and accommodations</li>
+                    <li><strong>Duty of care</strong> — Your legal responsibilities</li>
+                    <li><strong>Bullying prevention</strong> — Policies and procedures</li>
+                </ul>
+                <div class="popup-highlight">
+                    <p>🛡️ Child Safe Standards are legally mandated. All school staff must understand their obligations.</p>
+                </div>
+            `
+        },
+        'infra': {
+            title: 'Infrastructure and Facilities',
+            content: `
+                <p>Everything about <strong>school buildings, grounds, and physical assets</strong>.</p>
+                <p>Includes:</p>
+                <ul>
+                    <li>Victorian School Building Authority (VSBA) policies</li>
+                    <li>Maintenance and repairs</li>
+                    <li>Building upgrades and new construction</li>
+                    <li>Grounds management</li>
+                </ul>
+                <p>Mostly relevant for principals, business managers, and anyone involved in capital works projects.</p>
+            `
+        },
+        'ohs': {
+            title: 'Occupational Health & Safety (OHS)',
+            content: `
+                <p><strong>Staff safety</strong> — your rights and responsibilities as an employee.</p>
+                <p>This section covers the Department's OHS Management System (OHSMS), including:</p>
+                <ul>
+                    <li>Hazard identification and risk assessment</li>
+                    <li>Incident reporting</li>
+                    <li>Emergency procedures</li>
+                    <li>First aid requirements</li>
+                    <li>WorkCover and injury management</li>
+                </ul>
+                <div class="popup-warning">
+                    <p>⚠️ OHS isn't optional. Schools have legal obligations to maintain safe workplaces.</p>
+                </div>
+            `
+        },
+        'ops': {
+            title: 'School Operations',
+            content: `
+                <p>The <strong>day-to-day running</strong> of a school — the stuff that keeps everything functioning.</p>
+                <p>High-traffic topics include:</p>
+                <ul>
+                    <li><strong>Enrolment</strong> — Zone policies, applications, transfers</li>
+                    <li><strong>Excursions</strong> — Approval process, risk assessment</li>
+                    <li><strong>School hours</strong> — Start/end times, variations</li>
+                    <li><strong>Parent payments</strong> — What you can and can't charge</li>
+                    <li><strong>Mobile phones</strong> — The ban and how to implement it</li>
+                    <li><strong>OSHC</strong> — Outside School Hours Care</li>
+                </ul>
+            `
+        },
+        'council': {
+            title: 'School Councils',
+            content: `
+                <p>Information for <strong>School Council members</strong> — both parent members and staff representatives.</p>
+                <p>Covers:</p>
+                <ul>
+                    <li>Council roles and responsibilities</li>
+                    <li>Meeting procedures</li>
+                    <li>Financial oversight</li>
+                    <li>Policy approval processes</li>
+                    <li>Elections and membership</li>
+                </ul>
+                <div class="popup-highlight">
+                    <p>👥 School Councils are the governing body of each school. They have real decision-making power over budgets, policies, and school direction.</p>
+                </div>
+            `
+        },
+        'learning': {
+            title: 'Learning, Teaching & Curriculum',
+            content: `
+                <p>Policies supporting <strong>what happens in classrooms</strong> — the core business of schools.</p>
+                <p>Key areas:</p>
+                <ul>
+                    <li><strong>Victorian Curriculum</strong> — What students learn</li>
+                    <li><strong>Assessment & Reporting</strong> — How we measure progress</li>
+                    <li><strong>NAPLAN</strong> — National testing requirements</li>
+                    <li><strong>Career education</strong> — Pathways and transitions</li>
+                    <li><strong>School improvement</strong> — Performance data, reviews</li>
+                </ul>
+            `
+        },
+        'ict': {
+            title: 'Information Management & ICT',
+            content: `
+                <p>Technology, data, and digital systems in schools.</p>
+                <p>Includes:</p>
+                <ul>
+                    <li><strong>Hardware/software</strong> — What schools can use</li>
+                    <li><strong>Cyber security</strong> — Protecting school systems</li>
+                    <li><strong>Privacy</strong> — Handling student/staff data</li>
+                    <li><strong>Records management</strong> — What to keep, how long</li>
+                    <li><strong>Acceptable use</strong> — Staff and student device policies</li>
+                </ul>
+                <div class="popup-warning">
+                    <p>🔒 Privacy breaches are serious. Always check before sharing student information.</p>
+                </div>
+            `
+        },
+        'quick': {
+            title: 'Quick Links',
+            content: `
+                <p>Shortcuts to the most commonly needed parts of PAL.</p>
+                <ul>
+                    <li><strong>School Policy Templates</strong> — Ready-to-use templates for school-level policies</li>
+                    <li><strong>Recently Updated</strong> — See what's changed lately</li>
+                    <li><strong>PAL Help</strong> — How to navigate and search PAL</li>
+                </ul>
+                <div class="popup-highlight">
+                    <p>🔄 Check "Recently Updated" regularly — policies change, and you need to stay current.</p>
+                </div>
+            `
+        }
+    };
+
+    // Sample AI responses for common questions
+    const sampleResponses = {
+        'excursion': `
+            <p><strong>Beach excursions require extra planning.</strong></p>
+            <p>Key requirements:</p>
+            <ul>
+                <li><strong>Risk assessment</strong> — Water activities are considered higher risk. You'll need a detailed risk assessment specific to the beach location.</li>
+                <li><strong>Supervision ratios</strong> — Higher ratios required for water activities. Check the Excursions policy for specific numbers based on year level.</li>
+                <li><strong>Qualifications</strong> — If students are swimming, you need staff with appropriate water safety qualifications (Bronze Medallion or equivalent).</li>
+                <li><strong>Parent consent</strong> — Specific consent required for water-based activities.</li>
+            </ul>
+            <p><strong>📍 Read the full policy:</strong> <a href="https://www2.education.vic.gov.au/pal/excursions/policy" target="_blank" style="color: var(--vic-blue);">Excursions Policy</a> | <a href="https://www2.education.vic.gov.au/pal/excursions/guidance/risk-management-planning" target="_blank" style="color: var(--vic-blue);">Risk Management Guidelines</a></p>
+        `,
+        'mobile': `
+            <p><strong>Mobile phones must be switched off and stored securely during school hours.</strong></p>
+            <p>The key points:</p>
+            <ul>
+                <li><strong>The ban</strong> — Students cannot use phones at school, including at recess and lunch</li>
+                <li><strong>Storage</strong> — Schools must provide secure storage (lockers, pouches, etc.)</li>
+                <li><strong>Exceptions</strong> — Only for students with specific health conditions or learning needs, approved by the principal</li>
+                <li><strong>Consequences</strong> — Schools set their own consequences for non-compliance</li>
+            </ul>
+            <p><strong>📍 Read the full policy:</strong> <a href="https://www2.education.vic.gov.au/pal/students-using-mobile-phones/policy" target="_blank" style="color: var(--vic-blue);">Mobile Phones – Student Use Policy</a> | <a href="https://www2.education.vic.gov.au/pal/students-using-mobile-phones/resources" target="_blank" style="color: var(--vic-blue);">Resources & Templates</a></p>
+        `,
+        'anaphylaxis': `
+            <p><strong>Schools must have an Anaphylaxis Management Policy and individual plans for at-risk students.</strong></p>
+            <p>Your obligations:</p>
+            <ul>
+                <li><strong>Individual plans</strong> — Every student with anaphylaxis needs an ASCIA Action Plan signed by their doctor</li>
+                <li><strong>Staff training</strong> — All staff must complete anaphylaxis training (including how to use an EpiPen)</li>
+                <li><strong>EpiPens</strong> — Schools must have a general-use EpiPen for emergencies, plus students should have their own</li>
+                <li><strong>Communication</strong> — Risk minimisation strategies must be communicated to all relevant staff</li>
+            </ul>
+            <p><strong>📍 Read the full policy:</strong> <a href="https://www2.education.vic.gov.au/pal/anaphylaxis/policy" target="_blank" style="color: var(--vic-blue);">Anaphylaxis Policy</a> | <a href="https://www2.education.vic.gov.au/pal/anaphylaxis/guidance/5-staff-training" target="_blank" style="color: var(--vic-blue);">Staff Training Requirements</a></p>
+        `,
+        'leave': `
+            <p><strong>Teacher leave entitlements depend on your employment type.</strong></p>
+            <p>Common leave types:</p>
+            <ul>
+                <li><strong>Personal leave</strong> — 114 hours (15 days) per year for sick leave and carer's leave</li>
+                <li><strong>Annual leave</strong> — 152 hours (20 days) per year, taken during school holidays</li>
+                <li><strong>Long service leave</strong> — 3 months after 10 years (accessible pro-rata after 7 years)</li>
+                <li><strong>Parental leave</strong> — 16 weeks paid maternity leave, plus unpaid leave options</li>
+            </ul>
+            <p><strong>📍 Read the full policies:</strong> <a href="https://www2.education.vic.gov.au/pal/personal-leave-teaching-service/overview" target="_blank" style="color: var(--vic-blue);">Personal Leave</a> | <a href="https://www2.education.vic.gov.au/pal/long-service-leave-teaching-service/overview" target="_blank" style="color: var(--vic-blue);">Long Service Leave</a> | <a href="https://www2.education.vic.gov.au/pal/annual-leave-teaching-service/policy" target="_blank" style="color: var(--vic-blue);">Annual Leave</a></p>
+        `,
+        'default': `
+            <p>I can help with questions about Victorian school policies.</p>
+            <p>Try asking about:</p>
+            <ul>
+                <li>Student safety and wellbeing</li>
+                <li>Excursions and camps</li>
+                <li>Staff leave and entitlements</li>
+                <li>Mobile phone policy</li>
+                <li>Parent payments</li>
+                <li>OHS requirements</li>
+            </ul>
+            <p>Or browse the categories below, or visit <a href="https://www2.education.vic.gov.au/pal" target="_blank" style="color: var(--vic-blue);">PAL directly</a> to search all policies.</p>
+        `
+    };
+
+    // Set example question
+    function setQuestion(q) {
+        document.getElementById('questionInput').value = q;
+        document.getElementById('questionInput').focus();
+    }
+
+    // Ask question (simulated AI response)
+    function askQuestion() {
+        const input = document.getElementById('questionInput');
+        const question = input.value.trim().toLowerCase();
+        const responseDiv = document.getElementById('aiResponse');
+        const contentDiv = document.getElementById('aiResponseContent');
+        const btn = document.getElementById('askBtn');
+
+        if (!question) return;
+
+        // Show loading
+        btn.disabled = true;
+        responseDiv.classList.add('active');
+        contentDiv.innerHTML = `
+            <div class="ai-loading">
+                <div class="ai-loading-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span>Searching policies...</span>
+            </div>
+        `;
+
+        // Simulate API delay
+        setTimeout(() => {
+            let response = sampleResponses.default;
+
+            if (question.includes('excursion') || question.includes('beach') || question.includes('trip')) {
+                response = sampleResponses.excursion;
+            } else if (question.includes('mobile') || question.includes('phone')) {
+                response = sampleResponses.mobile;
+            } else if (question.includes('anaphylaxis') || question.includes('allergy') || question.includes('epipen')) {
+                response = sampleResponses.anaphylaxis;
+            } else if (question.includes('leave') || question.includes('sick') || question.includes('entitle')) {
+                response = sampleResponses.leave;
+            }
+
+            contentDiv.innerHTML = response;
+            btn.disabled = false;
+        }, 1500);
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('questionInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            askQuestion();
+        }
+    });
+
+    // Open popup
+    function openPopup(id) {
+        const content = itabsContent[id];
+        if (!content) return;
+        
+        document.getElementById('popupTitle').textContent = content.title;
+        document.getElementById('popupContent').innerHTML = content.content;
+        document.getElementById('popupOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close popup
+    function closePopup() {
+        document.getElementById('popupOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event listeners
+    document.querySelectorAll('.itabs-btn[data-popup]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openPopup(btn.dataset.popup);
+        });
+    });
+
+    // Close on overlay click
+    document.getElementById('popupOverlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            closePopup();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePopup();
+    });
+</script>
+```
+
+</body>
+</html>
