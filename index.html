@@ -518,6 +518,140 @@
         line-height: 1.5;
     }
 
+    .view-policies {
+        display: inline-block;
+        margin-top: 0.75rem;
+        color: var(--vic-blue);
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: color 0.2s;
+    }
+
+    .category-card:hover .view-policies {
+        color: var(--vic-teal);
+    }
+
+    /* Category Modal */
+    .category-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(32, 21, 71, 0.85);
+        z-index: 1000;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 2rem 1rem;
+        overflow-y: auto;
+        backdrop-filter: blur(4px);
+    }
+
+    .category-modal.active {
+        display: flex;
+    }
+
+    .category-modal-content {
+        background: white;
+        border-radius: 12px;
+        max-width: 600px;
+        width: 100%;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        animation: popupIn 0.3s ease;
+    }
+
+    .category-modal-header {
+        background: var(--vic-navy);
+        color: white;
+        padding: 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 12px 12px 0 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .category-modal-header h3 {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .category-modal-body {
+        padding: 1rem;
+    }
+
+    .policy-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .policy-list li {
+        border-bottom: 1px solid #E8E8E8;
+    }
+
+    .policy-list li:last-child {
+        border-bottom: none;
+    }
+
+    .policy-link {
+        display: flex;
+        align-items: center;
+        padding: 0.875rem 0.75rem;
+        color: var(--vic-navy);
+        text-decoration: none;
+        transition: background 0.2s;
+        border-radius: 6px;
+        margin: 2px 0;
+    }
+
+    .policy-link:hover {
+        background: #F0F7FF;
+        color: var(--vic-blue);
+    }
+
+    .policy-link span {
+        flex: 1;
+        font-size: 0.95rem;
+    }
+
+    .policy-link::after {
+        content: '→';
+        color: var(--vic-blue);
+        font-weight: 600;
+        opacity: 0;
+        transition: opacity 0.2s, transform 0.2s;
+        transform: translateX(-5px);
+    }
+
+    .policy-link:hover::after {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .view-all-link {
+        display: block;
+        text-align: center;
+        padding: 1rem;
+        background: var(--vic-light);
+        color: var(--vic-blue);
+        text-decoration: none;
+        font-weight: 600;
+        border-radius: 0 0 12px 12px;
+        transition: background 0.2s;
+    }
+
+    .view-all-link:hover {
+        background: #E8F0FA;
+    }
+
     /* Quick Links */
     .quick-links {
         margin-top: 2.5rem;
@@ -911,7 +1045,7 @@
 
     <div class="category-grid">
         <!-- HR -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('hr')" style="cursor: pointer;">
             <div class="card-image hr">👥</div>
             <div class="card-content">
                 <h3>
@@ -919,11 +1053,12 @@
                     <button class="itabs-btn" data-popup="hr">i</button>
                 </h3>
                 <p>Employment conditions, workforce management, recruitment and respectful workplaces</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
 
         <!-- Finance -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('finance')" style="cursor: pointer;">
             <div class="card-image finance">💰</div>
             <div class="card-content">
                 <h3>
@@ -931,11 +1066,12 @@
                     <button class="itabs-btn" data-popup="finance">i</button>
                 </h3>
                 <p>Finance Manual, Student Resource Package, procurement, budget requirements</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
 
         <!-- Student -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('student')" style="cursor: pointer;">
             <div class="card-image student">🎒</div>
             <div class="card-content">
                 <h3>
@@ -943,11 +1079,12 @@
                     <button class="itabs-btn" data-popup="student">i</button>
                 </h3>
                 <p>Child safety, health conditions, students with disabilities, duty of care</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
 
         <!-- Infrastructure -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('infra')" style="cursor: pointer;">
             <div class="card-image infra">🏫</div>
             <div class="card-content">
                 <h3>
@@ -955,11 +1092,12 @@
                     <button class="itabs-btn" data-popup="infra">i</button>
                 </h3>
                 <p>Planning, building and management of school infrastructure and facilities</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
 
         <!-- OHS -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('ohs')" style="cursor: pointer;">
             <div class="card-image ohs">⚠️</div>
             <div class="card-content">
                 <h3>
@@ -967,11 +1105,12 @@
                     <button class="itabs-btn" data-popup="ohs">i</button>
                 </h3>
                 <p>Employee health, safety and wellbeing including the OHS management system</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
 
         <!-- Operations -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('ops')" style="cursor: pointer;">
             <div class="card-image ops">📋</div>
             <div class="card-content">
                 <h3>
@@ -979,11 +1118,12 @@
                     <button class="itabs-btn" data-popup="ops">i</button>
                 </h3>
                 <p>School hours, enrolment, excursions, OSHC, parent payments, mobile phones</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
 
         <!-- School Council -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('council')" style="cursor: pointer;">
             <div class="card-image council">🏛️</div>
             <div class="card-content">
                 <h3>
@@ -991,11 +1131,12 @@
                     <button class="itabs-btn" data-popup="council">i</button>
                 </h3>
                 <p>Key information and policies to support school council governance</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
 
         <!-- Learning -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('learning')" style="cursor: pointer;">
             <div class="card-image learning">📚</div>
             <div class="card-content">
                 <h3>
@@ -1003,11 +1144,12 @@
                     <button class="itabs-btn" data-popup="learning">i</button>
                 </h3>
                 <p>Curriculum delivery, assessment, reporting, career education</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
 
         <!-- ICT -->
-        <div class="category-card">
+        <div class="category-card" onclick="openCategoryModal('ict')" style="cursor: pointer;">
             <div class="card-image ict">💻</div>
             <div class="card-content">
                 <h3>
@@ -1015,6 +1157,7 @@
                     <button class="itabs-btn" data-popup="ict">i</button>
                 </h3>
                 <p>Hardware, software, ICT security, privacy and records management</p>
+                <span class="view-policies">View policies →</span>
             </div>
         </div>
     </div>
@@ -1050,6 +1193,22 @@
     </div>
 </footer>
 
+<!-- Category Modal -->
+<div class="category-modal" id="categoryModal">
+    <div class="category-modal-content">
+        <div class="category-modal-header">
+            <h3 id="categoryModalTitle">Category</h3>
+            <button class="popup-close" onclick="closeCategoryModal()">×</button>
+        </div>
+        <div class="category-modal-body">
+            <ul class="policy-list" id="policyList">
+                <!-- Policies injected by JS -->
+            </ul>
+        </div>
+        <a href="#" class="view-all-link" id="viewAllLink" target="_blank">View all on PAL →</a>
+    </div>
+</div>
+
 <!-- Popup Overlay -->
 <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
@@ -1064,6 +1223,170 @@
 </div>
 
 <script>
+    // Category policies data with real PAL links
+    const categoryPolicies = {
+        'hr': {
+            title: '👥 Human Resources (HR)',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=Human+resources%3A+HRWeb',
+            policies: [
+                { name: 'Personal Leave — Teaching Service', url: 'https://www2.education.vic.gov.au/pal/personal-leave-teaching-service/overview' },
+                { name: 'Annual Leave — Teaching Service', url: 'https://www2.education.vic.gov.au/pal/annual-leave-teaching-service/policy' },
+                { name: 'Long Service Leave — Teaching Service', url: 'https://www2.education.vic.gov.au/pal/long-service-leave-teaching-service/overview' },
+                { name: 'Parental Absence — Teaching Service', url: 'https://www2.education.vic.gov.au/pal/parental-absence-teaching-service/policy-and-guidelines/leave-entitlements' },
+                { name: 'Allowances — Teaching Service', url: 'https://www2.education.vic.gov.au/pal/allowances-teaching-service/overview' },
+                { name: 'Recruitment in Schools', url: 'https://www2.education.vic.gov.au/pal/recruitment-schools/overview' },
+                { name: 'Performance and Development', url: 'https://www2.education.vic.gov.au/pal/performance-and-development/overview' },
+                { name: 'Respectful Workplaces', url: 'https://www2.education.vic.gov.au/pal/respectful-workplaces/overview' },
+                { name: 'Attendance and Working Hours', url: 'https://www2.education.vic.gov.au/pal/attendance-and-working-hours-teaching-service/overview' },
+                { name: 'Cessation of Employment', url: 'https://www2.education.vic.gov.au/pal/cessation-employment-teaching-service/overview' }
+            ]
+        },
+        'finance': {
+            title: '💰 Finance and Procurement',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=Finance+and+procurement',
+            policies: [
+                { name: 'Finance Manual for Victorian Government Schools', url: 'https://www2.education.vic.gov.au/pal/finance-manual/overview' },
+                { name: 'Student Resource Package (SRP)', url: 'https://www2.education.vic.gov.au/pal/student-resource-package/overview' },
+                { name: 'Procurement — Schools', url: 'https://www2.education.vic.gov.au/pal/procurement-schools/policy' },
+                { name: 'Parent Payments', url: 'https://www2.education.vic.gov.au/pal/parent-payment/policy' },
+                { name: 'Camps, Sports and Excursions Fund (CSEF)', url: 'https://www2.education.vic.gov.au/pal/camps-sports-and-excursions-fund/policy' },
+                { name: 'School Council Financial Management', url: 'https://www2.education.vic.gov.au/pal/school-council-financial-management/policy' },
+                { name: 'Cash Handling', url: 'https://www2.education.vic.gov.au/pal/cash-handling/policy' },
+                { name: 'Trading Operations', url: 'https://www2.education.vic.gov.au/pal/trading-operations/policy' }
+            ]
+        },
+        'student': {
+            title: '🎒 Student Health, Safety & Wellbeing',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=Student+health%2C+safety%2C+wellbeing+and+engagement',
+            policies: [
+                { name: 'Child Safe Standards', url: 'https://www2.education.vic.gov.au/pal/child-safe-standards/policy' },
+                { name: 'Anaphylaxis', url: 'https://www2.education.vic.gov.au/pal/anaphylaxis/policy' },
+                { name: 'Allergies', url: 'https://www2.education.vic.gov.au/pal/allergies/policy' },
+                { name: 'Asthma', url: 'https://www2.education.vic.gov.au/pal/asthma/policy' },
+                { name: 'Diabetes', url: 'https://www2.education.vic.gov.au/pal/diabetes/policy' },
+                { name: 'Students with Disability', url: 'https://www2.education.vic.gov.au/pal/students-disability/policy' },
+                { name: 'Duty of Care', url: 'https://www2.education.vic.gov.au/pal/duty-of-care/policy' },
+                { name: 'Bullying Prevention and Response', url: 'https://www2.education.vic.gov.au/pal/bullying-prevention-response/policy' },
+                { name: 'Student Wellbeing and Engagement', url: 'https://www2.education.vic.gov.au/pal/student-wellbeing-engagement-policy/policy' },
+                { name: 'Restraint and Seclusion', url: 'https://www2.education.vic.gov.au/pal/restraint-seclusion/policy' }
+            ]
+        },
+        'infra': {
+            title: '🏫 Infrastructure and Facilities',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=Infrastructure+and+facilities',
+            policies: [
+                { name: 'Buildings and Grounds Maintenance', url: 'https://www2.education.vic.gov.au/pal/buildings-grounds-maintenance/policy' },
+                { name: 'Asset Management', url: 'https://www2.education.vic.gov.au/pal/asset-management/policy' },
+                { name: 'School Facilities', url: 'https://www2.education.vic.gov.au/pal/school-facilities/policy' },
+                { name: 'Community Use of School Facilities', url: 'https://www2.education.vic.gov.au/pal/community-use-school-facilities/policy' },
+                { name: 'Playgrounds', url: 'https://www2.education.vic.gov.au/pal/playgrounds/policy' },
+                { name: 'Shade in Schools', url: 'https://www2.education.vic.gov.au/pal/shade-schools/guidance' },
+                { name: 'School Fencing', url: 'https://www2.education.vic.gov.au/pal/school-fencing/policy' }
+            ]
+        },
+        'ohs': {
+            title: '⚠️ Occupational Health & Safety',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=Occupational+health+and+safety',
+            policies: [
+                { name: 'OHS Management System', url: 'https://www2.education.vic.gov.au/pal/occupational-health-and-safety-management-system-ohsms/policy' },
+                { name: 'First Aid for Students and Staff', url: 'https://www2.education.vic.gov.au/pal/first-aid-students-and-staff/policy' },
+                { name: 'Hazard Identification and Risk Assessment', url: 'https://www2.education.vic.gov.au/pal/hazard-identification-and-risk-assessment/policy' },
+                { name: 'Incident Reporting', url: 'https://www2.education.vic.gov.au/pal/incident-reporting/policy' },
+                { name: 'Emergency Management', url: 'https://www2.education.vic.gov.au/pal/emergency-management/policy' },
+                { name: 'Work-Related Driving', url: 'https://www2.education.vic.gov.au/pal/work-related-driving/policy' },
+                { name: 'Workers Compensation', url: 'https://www2.education.vic.gov.au/pal/workers-compensation/overview' },
+                { name: 'Manual Handling', url: 'https://www2.education.vic.gov.au/pal/manual-handling/policy' }
+            ]
+        },
+        'ops': {
+            title: '📋 School Operations',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=School+operations+and+student+administration',
+            policies: [
+                { name: 'Excursions', url: 'https://www2.education.vic.gov.au/pal/excursions/policy' },
+                { name: 'Mobile Phones — Student Use', url: 'https://www2.education.vic.gov.au/pal/students-using-mobile-phones/policy' },
+                { name: 'Enrolment', url: 'https://www2.education.vic.gov.au/pal/enrolment/policy' },
+                { name: 'Attendance', url: 'https://www2.education.vic.gov.au/pal/attendance/policy' },
+                { name: 'School Hours', url: 'https://www2.education.vic.gov.au/pal/school-hours/policy' },
+                { name: 'Outside School Hours Care (OSHC)', url: 'https://www2.education.vic.gov.au/pal/outside-school-hours-care/policy' },
+                { name: 'Uniforms in Schools', url: 'https://www2.education.vic.gov.au/pal/uniforms-schools/policy' },
+                { name: 'Volunteers in Schools', url: 'https://www2.education.vic.gov.au/pal/volunteers/policy' },
+                { name: 'Visitors in Schools', url: 'https://www2.education.vic.gov.au/pal/visitors/policy' },
+                { name: 'Student Transport', url: 'https://www2.education.vic.gov.au/pal/student-transport/policy' }
+            ]
+        },
+        'council': {
+            title: '🏛️ School Councils',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=School+councils',
+            policies: [
+                { name: 'School Council Overview', url: 'https://www2.education.vic.gov.au/pal/school-council-overview/policy' },
+                { name: 'School Council Elections', url: 'https://www2.education.vic.gov.au/pal/school-council-elections/policy' },
+                { name: 'School Council Meetings', url: 'https://www2.education.vic.gov.au/pal/school-council-meetings/policy' },
+                { name: 'School Council Financial Management', url: 'https://www2.education.vic.gov.au/pal/school-council-financial-management/policy' },
+                { name: 'School Council Powers and Functions', url: 'https://www2.education.vic.gov.au/pal/school-council-powers-functions/policy' },
+                { name: 'School Council Membership', url: 'https://www2.education.vic.gov.au/pal/school-council-membership/policy' },
+                { name: 'School Council Training', url: 'https://www2.education.vic.gov.au/pal/school-council-training/guidance' }
+            ]
+        },
+        'learning': {
+            title: '📚 Learning, Teaching & Curriculum',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=Learning%2C+teaching%2C+curriculum+and+improvement',
+            policies: [
+                { name: 'Victorian Curriculum', url: 'https://www2.education.vic.gov.au/pal/victorian-curriculum-f-10/policy' },
+                { name: 'Assessment and Reporting', url: 'https://www2.education.vic.gov.au/pal/assessment/policy' },
+                { name: 'NAPLAN', url: 'https://www2.education.vic.gov.au/pal/naplan/policy' },
+                { name: 'Career Education', url: 'https://www2.education.vic.gov.au/pal/career-education/policy' },
+                { name: 'Languages Education', url: 'https://www2.education.vic.gov.au/pal/languages-education/policy' },
+                { name: 'Physical Education and Sport', url: 'https://www2.education.vic.gov.au/pal/physical-education-sport/policy' },
+                { name: 'Homework', url: 'https://www2.education.vic.gov.au/pal/homework/policy' },
+                { name: 'Religious Instruction', url: 'https://www2.education.vic.gov.au/pal/religious-instruction/policy' }
+            ]
+        },
+        'ict': {
+            title: '💻 Information Management & ICT',
+            palUrl: 'https://www2.education.vic.gov.au/filter-az?filters%5Bfield_pal_category_name%5D%5Btype%5D=term&filters%5Bfield_pal_category_name%5D%5Bvalues%5D=Information+management%2C+technology+and+security',
+            policies: [
+                { name: 'Digital Technologies — Responsible Use', url: 'https://www2.education.vic.gov.au/pal/digital-technologies-responsible-use/policy' },
+                { name: 'ICT Acceptable Use', url: 'https://www2.education.vic.gov.au/pal/ict-acceptable-use/policy' },
+                { name: 'Privacy and Information Sharing', url: 'https://www2.education.vic.gov.au/pal/privacy-information-sharing/policy' },
+                { name: 'Records Management — School Records', url: 'https://www2.education.vic.gov.au/pal/records-management/policy' },
+                { name: 'Photographing and Filming Students', url: 'https://www2.education.vic.gov.au/pal/photographing-students/policy' },
+                { name: 'Social Media', url: 'https://www2.education.vic.gov.au/pal/social-media/policy' },
+                { name: 'Cybersafety and Cyberbullying', url: 'https://www2.education.vic.gov.au/pal/cybersafety/policy' },
+                { name: 'Technologies and ICT Services', url: 'https://www2.education.vic.gov.au/pal/technologies-and-ict-services/policy' }
+            ]
+        }
+    };
+
+    // Open category modal
+    function openCategoryModal(categoryId) {
+        const category = categoryPolicies[categoryId];
+        if (!category) return;
+
+        document.getElementById('categoryModalTitle').innerHTML = category.title;
+        document.getElementById('viewAllLink').href = category.palUrl;
+
+        const listHtml = category.policies.map(p => 
+            `<li><a href="${p.url}" target="_blank" class="policy-link"><span>${p.name}</span></a></li>`
+        ).join('');
+        document.getElementById('policyList').innerHTML = listHtml;
+
+        document.getElementById('categoryModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close category modal
+    function closeCategoryModal() {
+        document.getElementById('categoryModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close modal on background click
+    document.getElementById('categoryModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            closeCategoryModal();
+        }
+    });
+
     // iTabs Content Database for PAL
     const itabsContent = {
         'what-is-pal': {
@@ -1409,7 +1732,7 @@
         document.body.style.overflow = '';
     }
 
-    // Event listeners
+    // Event listeners for iTabs buttons
     document.querySelectorAll('.itabs-btn[data-popup]').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1426,7 +1749,10 @@
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closePopup();
+        if (e.key === 'Escape') {
+            closePopup();
+            closeCategoryModal();
+        }
     });
 </script>
 ```
